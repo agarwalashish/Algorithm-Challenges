@@ -7,16 +7,32 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LonelyInteger.h"
 
 int main(int argc, const char * argv[])
 {
-
-    @autoreleasepool {
-        
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
+    int numberOfIntegers;
+    scanf("%i", &numberOfIntegers);
+   
+    char input[100];
+    NSString *inputString;
+    
+    scanf(" %[^\n]s", input);
+    inputString = [NSString stringWithCString:input encoding:NSASCIIStringEncoding];
+    
+    NSArray *tempStrings = [inputString componentsSeparatedByString:@" "];
+    NSMutableArray *inputNumbers = [NSMutableArray array];
+    
+    for (int i = 0; i < numberOfIntegers; i++) {
+        NSString *string = [tempStrings objectAtIndex:i];
+        [inputNumbers addObject: string];
     }
+    
+    LonelyInteger *lonelyObject = [[LonelyInteger alloc] initWithArray:inputNumbers];
+    NSInteger lonelyInteger = [lonelyObject singleInteger];
+    
+    NSLog(@"%li", (long)lonelyInteger);
+   
     return 0;
 }
 
